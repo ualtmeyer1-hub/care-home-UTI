@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Care Home UTI Symptom &amp; Urine Sampling Guide</title>
+
+  <!-- PWA & Mobile App Meta Tags -->
+  <meta name="theme-color" content="#003087">
+  <meta name="description" content="Care Home UTI Symptom & Urine Sampling Guide (UKHSA / SIGN 160 / NICE QS90 / UK SMI B 41)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="UTI Guide">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='112' fill='%23003087'/%3E%3Cpath d='M256 96L112 208v192a16 16 0 0016 16h80V288h96v128h80a16 16 0 0016-16V208L256 96z' fill='none' stroke='%235eead4' stroke-width='28' stroke-linejoin='round'/%3E%3Ctext x='256' y='245' font-family='system-ui,sans-serif' font-weight='900' font-size='76' fill='%23ffffff' text-anchor='middle'%3EUTI%3C/text%3E%3C/svg%3E">
+
+  <style>
+    :root {
+      --nhs-dark: #003087;
+      --nhs-blue: #005EB8;
+      --nhs-teal: #006747;
+      --bg-page: #F1F5F9;
+      --text-main: #0F172A;
+      --text-muted: #475569;
+      --border-light: #CBD5E1;
+      --card-bg: #FFFFFF;
+      --red-600: #DC2626;
+      --red-700: #B91C1C;
+      --red-50: #FEF2F2;
+      --amber-600: #D97706;
+      --amber-50: #FFFBEB;
+      --emerald-700: #047857;
+      --emerald-50: #ECFDF5;
+      --sky-700: #0369A1;
+      --sky-50: #F0F9FF;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.45;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding-bottom: calc(96px + env(safe-area-inset-bottom));
+    }
+
+    .hidden { display: none !important; }
+
+    /* Header */
+    .app-header {
+      background: var(--nhs-dark);
+      color: #fff;
+      padding: calc(12px + env(safe-area-inset-top)) 16px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+    }
+    .header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+    .badge-teal {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: rgba(13, 148, 136, 0.85);
+      padding: 2px 8px;
+      border-radius: 4px;
+      border: 1px solid rgba(94, 234, 212, 0.35);
+    }
+    .badge-sub {
+      font-size: 11px;
+      color: #BFDBFE;
+      font-weight: 600;
+    }
+    .app-title {
+      margin: 0;
+      font-size: 1.125rem;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+    .btn-reset {
+      background: rgba(255,255,255,0.16);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      shrink: 0;
+      min-height: 44px;
+    }
+    .btn-reset:active { background: rgba(255,255,255,0.28); }
+
+    /* Main Container */
+    .container {
+      max-width: 960px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Safety Banner */
+    .safety-banner {
+      background: var(--red-700);
+      color: #fff;
+      border-radius: 16px;
+      padding: 14px 16px;
+      border: 2px solid #7F1D1D;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+    .safety-icon {
+      background: rgba(255,255,255,0.16);
+      padding: 8px;
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+    .safety-banner h2 {
+      margin: 0 0 4px;
+      font-size: 0.875rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+    .safety-banner p {
+      margin: 0;
+      font-size: 0.8125rem;
+      color: #FFE4E6;
+    }
+
+    /* Cards & Step Sections */
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      border: 1px solid #E2E8F0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+    .card-red { border: 2px solid #FECDD3; }
+    .card-blue { border: 2px solid var(--nhs-blue); }
+    .card-sky { border: 2px solid #38BDF8; background: var(--sky-50); }
+
+    .card-header {
+      background: #F8FAFC;
+      border-bottom: 1px solid #E2E8F0;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .card-header-red { background: var(--red-50); border-bottom-color: #FECDD3; }
+    .card-header-blue { background: var(--nhs-blue); color: #fff; border-bottom: none; }
+
+    .step-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--nhs-blue);
+      color: #fff;
+      font-size: 0.875rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-num-red { background: var(--red-600); }
+    .step-heading {
+      margin: 0;
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+    .step-heading-red { color: #4C0519; }
+    .step-sub {
+      margin: 1px 0 0;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    .pill {
+      font-size: 0.6875rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .pill-red { background: var(--red-600); color: #fff; text-transform: uppercase; }
+    .pill-slate { background: #E2E8F0; color: #1E293B; }
+
+    .card-body { padding: 16px; }
+
+    /* Grids */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    @media (min-width: 640px) {
+      .grid-2 { grid-template-columns: 1fr 1fr; }
+      .span-2 { grid-column: span 2; }
+    }
+
+    /* Catheter Radio Buttons */
+    .radio-card {
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 2px solid #CBD5E1;
+      background: #fff;
+      color: #334155;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 6px;
+      min-height: 76px;
+      transition: all 0.15s ease;
+    }
+    .radio-card.active {
+      border-color: var(--nhs-blue);
+      background: #EFF6FF;
+      color: var(--nhs-dark);
+    }
+    .radio-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      font-weight: 800;
+      font-size: 0.95rem;
+    }
+    .radio-dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid #94A3B8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .radio-card.active .radio-dot {
+      border-color: var(--nhs-blue);
+      background: var(--nhs-blue);
+    }
+    .radio-card.active .radio-dot::after {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #fff;
+    }
+    .radio-desc { font-size: 0.78rem; opacity: 0.9; }
+
+    /* Mobile-Friendly Tap Checkboxes */
+    .chk-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px;
+      border-radius: 12px;
+      border: 2px solid #E2E8F0;
+      background: #fff;
+      cursor: pointer;
+      user-select: none;
+      min-height: 54px;
+      transition: border-color 0.15s ease, background-color 0.15s ease;
+    }
+    .chk-card:active { transform: scale(0.995); }
+    .chk-card.chk-emerald { border-color: #A7F3D0; background: #ECFDF5; }
+    .chk-card.chk-amber { border-color: #FDE68A; background: #FFFBEB; }
+    .chk-card.chk-blue { border-color: #BFDBFE; background: #EFF6FF; }
+
+    .chk-card input[type="checkbox"] {
+      width: 22px;
+      height: 22px;
+      margin-top: 1px;
+      flex-shrink: 0;
+      accent-color: var(--nhs-blue);
+      cursor: pointer;
+    }
+    .chk-card input[type="checkbox"].red-chk { accent-color: var(--red-600); }
+    .chk-card input[type="checkbox"].amber-chk { accent-color: var(--amber-600); }
+
+    .chk-title {
+      display: block;
+      font-weight: 700;
+      font-size: 0.875rem;
+      color: var(--text-main);
+    }
+    .chk-sub {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* Group Dividers */
+    .group-section { display: flex; flex-direction: column; gap: 10px; }
+    .group-divider { padding-top: 16px; border-top: 1px solid #E2E8F0; }
+    .group-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .group-label {
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .dot-ind { width: 9px; height: 9px; border-radius: 50%; }
+    .tag-box {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 6px;
+      border: 1px solid;
+    }
+
+    /* Verdict Card */
+    .verdict-top {
+      padding: 18px 16px;
+      color: #fff;
+      transition: background-color 0.2s ease;
+    }
+    .bg-verdict-green { background: var(--emerald-700); }
+    .bg-verdict-blue { background: var(--sky-700); }
+    .bg-verdict-amber { background: var(--amber-600); }
+    .bg-verdict-red { background: var(--red-600); }
+
+    .verdict-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .verdict-pill {
+      font-size: 0.6875rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.22);
+    }
+    .verdict-title {
+      margin: 0;
+      font-size: 1.125rem;
+      font-weight: 900;
+      line-height: 1.25;
+    }
+    .verdict-summary {
+      margin: 6px 0 0;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.95);
+    }
+
+    .action-list {
+      list-style: none;
+      margin: 10px 0 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .action-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.85rem;
+    }
+    .check-circle {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #F1F5F9;
+      color: #334155;
+      font-weight: 800;
+      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* Action Buttons */
+    .btn-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid #E2E8F0;
+    }
+    @media (min-width: 480px) {
+      .btn-row.has-share { grid-template-columns: 1fr auto; }
+    }
+    .btn-primary {
+      width: 100%;
+      min-height: 48px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: none;
+      background: var(--nhs-dark);
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .btn-primary:active { background: var(--nhs-blue); }
+    .btn-secondary {
+      min-height: 48px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 2px solid var(--nhs-dark);
+      background: #fff;
+      color: var(--nhs-dark);
+      font-size: 0.9rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    /* PINCH ME & Sampling Steps */
+    .pinch-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 12px;
+      background: #fff;
+      border: 1px solid #BAE6FD;
+      border-radius: 10px;
+      font-size: 0.8125rem;
+      cursor: pointer;
+      min-height: 44px;
+    }
+    .pinch-item input { width: 20px; height: 20px; accent-color: var(--sky-700); flex-shrink: 0; }
+
+    .sample-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.8125rem;
+    }
+    .sample-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #DBEAFE;
+      color: var(--nhs-dark);
+      font-weight: 800;
+      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .callout-amber {
+      background: var(--amber-50);
+      border: 1px solid #FDE68A;
+      padding: 12px;
+      border-radius: 12px;
+    }
+    .callout-red {
+      background: var(--red-50);
+      border: 1px solid #FECDD3;
+      padding: 10px 12px;
+      border-radius: 10px;
+      color: #881337;
+      font-size: 0.8125rem;
+    }
+
+    /* Evidence Drawer */
+    .drawer-btn {
+      width: 100%;
+      padding: 14px 16px;
+      background: #F8FAFC;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-align: left;
+      cursor: pointer;
+      min-height: 56px;
+    }
+    .ev-box {
+      padding: 12px;
+      border-radius: 12px;
+      font-size: 0.78rem;
+      border: 1px solid #CBD5E1;
+      background: #F8FAFC;
+    }
+
+    /* Sticky Bottom Mobile Bar */
+    .sticky-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 40;
+      padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+      color: #fff;
+      box-shadow: 0 -4px 14px rgba(0,0,0,0.16);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      transition: background-color 0.2s ease;
+    }
+    .sticky-info {
+      min-width: 0;
+      flex: 1;
+    }
+    .sticky-kicker {
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      opacity: 0.9;
+      display: block;
+    }
+    .sticky-text {
+      font-size: 0.85rem;
+      font-weight: 800;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
+    }
+    .sticky-cta {
+      background: rgba(255,255,255,0.22);
+      border: 1px solid rgba(255,255,255,0.45);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 9px 12px;
+      border-radius: 10px;
+      text-decoration: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0F172A;
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 12px 18px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      z-index: 60;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+    .toast.show { opacity: 1; }
+
+    footer {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      padding: 8px 16px 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div>
+        <div class="badge-row">
+          <span class="badge-teal">Care Home Frontline Guide</span>
+          <span class="badge-sub">UKHSA &bull; SIGN 160 &bull; NICE QS90 &bull; UK SMI B 41</span>
+        </div>
+        <h1 class="app-title">When to Suspect a UTI &amp; Collect a Sample</h1>
+      </div>
+      <button id="resetBtn" type="button" class="btn-reset" aria-label="Reset form">
+        &#8635; Reset
+      </button>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Golden Safety Rule -->
+    <section aria-label="Important Safety Rule" class="safety-banner">
+      <div class="safety-icon" aria-hidden="true">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+        </svg>
+      </div>
+      <div>
+        <h2>DO NOT DIPSTICK URINE in Residents (65+) or Catheters</h2>
+        <p>
+          Up to <strong>50% of care home residents</strong> and nearly <strong>100% of long-term catheters</strong> have harmless bacteria in their urine. Dipsticks almost always turn positive, causing <strong>false alarms</strong> and unnecessary antibiotics.
+        </p>
+      </div>
+    </section>
+
+    <!-- STEP 1: Catheter Status -->
+    <section class="card">
+      <div class="card-header">
+        <div class="step-title-wrap">
+          <span class="step-num">1</span>
+          <div>
+            <h2 class="step-heading">Does the Resident Have a Urinary Catheter?</h2>
+            <p class="step-sub">Tap to select the right checklist</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-body grid-2" role="radiogroup" aria-label="Resident Catheter Status">
+        <button type="button" id="btnNoCatheter" aria-checked="true" role="radio" class="radio-card active">
+          <div class="radio-top">
+            <span>No Urinary Catheter</span>
+            <span class="radio-dot"></span>
+          </div>
+          <span class="radio-desc">Standard Care Home Resident (Aged 65+)</span>
+        </button>
+
+        <button type="button" id="btnHasCatheter" aria-checked="false" role="radio" class="radio-card">
+          <div class="radio-top">
+            <span>Has a Urinary Catheter</span>
+            <span class="radio-dot"></span>
+          </div>
+          <span class="radio-desc">Indwelling catheter in place (or removed &le;48h)</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- STEP 2: Sepsis / Red Flags -->
+    <section class="card card-red">
+      <div class="card-header card-header-red">
+        <div class="step-title-wrap">
+          <span class="step-num step-num-red">2</span>
+          <div>
+            <h2 class="step-heading step-heading-red">Check for Urgent Sepsis / Kidney Red Flags</h2>
+            <p class="step-sub" style="color:#9F1239;">Tick ANY sign that is new today (RESTORE2 / NEWS2)</p>
+          </div>
+        </div>
+        <span class="pill pill-red">Urgent</span>
+      </div>
+
+      <div class="card-body grid-2">
+        <label class="chk-card">
+          <input type="checkbox" id="rfFever" class="red-chk">
+          <div>
+            <span class="chk-title">High or very low temperature</span>
+            <span class="chk-sub">Fever &gt;37.9&deg;C (+1.5&deg;C above usual) OR &le;36.0&deg;C</span>
+          </div>
+        </label>
+
+        <label class="chk-card">
+          <input type="checkbox" id="rfRigors" class="red-chk">
+          <div>
+            <span class="chk-title">Shaking chills (rigors)</span>
+            <span class="chk-sub">Uncontrollable shivering or teeth chattering</span>
+          </div>
+        </label>
+
+        <label class="chk-card">
+          <input type="checkbox" id="rfLoinPain" class="red-chk">
+          <div>
+            <span class="chk-title">New lower back / side pain</span>
+            <span class="chk-sub">Pain or tenderness under the ribs (loin / flank)</span>
+          </div>
+        </label>
+
+        <label class="chk-card">
+          <input type="checkbox" id="rfUnwell" class="red-chk">
+          <div>
+            <span class="chk-title">Acutely unwell / Sepsis signs</span>
+            <span class="chk-sub">Fast breathing, racing pulse, low BP, mottled, hard to wake</span>
+          </div>
+        </label>
+      </div>
+    </section>
+
+    <!-- STEP 3: Dynamic Symptom Checklist -->
+    <section class="card">
+      <div class="card-header">
+        <div class="step-title-wrap">
+          <span class="step-num">3</span>
+          <div>
+            <h2 id="step3Title" class="step-heading">Tick New Urinary &amp; General Signs</h2>
+            <p id="step3Subtitle" class="step-sub">For residents WITHOUT a urinary catheter (65+)</p>
+          </div>
+        </div>
+        <span id="step3CountPill" class="pill pill-slate">0 signs</span>
+      </div>
+
+      <div class="card-body">
+
+        <!-- NON-CATHETERISED CHECKLIST -->
+        <div id="checklistNonCatheter" class="group-section" style="gap:18px;">
+
+          <!-- Group A: Dysuria -->
+          <div class="group-section">
+            <div class="group-header">
+              <span class="group-label" style="color:#065F46;">
+                <span class="dot-ind" style="background:#059669;"></span>
+                Key Urinary Symptom
+              </span>
+              <span class="tag-box" style="color:#065F46; background:#ECFDF5; border-color:#A7F3D0;">1 sign = Suspect UTI</span>
+            </div>
+            <label class="chk-card chk-emerald">
+              <input type="checkbox" id="ncDysuria">
+              <div>
+                <span class="chk-title">New pain, stinging, or burning when passing urine (dysuria)</span>
+                <span class="chk-sub">Complains of pain when peeing, or winces/cries out during voiding</span>
+              </div>
+            </label>
+          </div>
+
+          <!-- Group B: Other Localised Urinary Symptoms -->
+          <div class="group-section group-divider">
+            <div class="group-header">
+              <span class="group-label" style="color:var(--nhs-dark);">
+                <span class="dot-ind" style="background:var(--nhs-blue);"></span>
+                Other Urinary Symptoms (Need 2+ if no dysuria)
+              </span>
+              <span id="ncOtherCountBadge" class="tag-box" style="color:var(--nhs-dark); background:#EFF6FF; border-color:#BFDBFE;">0 / 2 ticked</span>
+            </div>
+
+            <div class="grid-2">
+              <label class="chk-card">
+                <input type="checkbox" id="ncIncontinence">
+                <div>
+                  <span class="chk-title">New or noticeably worse incontinence</span>
+                  <span class="chk-sub">Wet pads/clothing when normally dry, or sudden worsening</span>
+                </div>
+              </label>
+
+              <label class="chk-card">
+                <input type="checkbox" id="ncUrgency">
+                <div>
+                  <span class="chk-title">New urgency</span>
+                  <span class="chk-sub">Sudden urgent need / rushing to reach the toilet</span>
+                </div>
+              </label>
+
+              <label class="chk-card">
+                <input type="checkbox" id="ncFrequency">
+                <div>
+                  <span class="chk-title">Passing urine much more often</span>
+                  <span class="chk-sub">New frequent toilet visits or small frequent voids</span>
+                </div>
+              </label>
+
+              <label class="chk-card">
+                <input type="checkbox" id="ncSuprapubic">
+                <div>
+                  <span class="chk-title">New lower tummy / pelvic pain</span>
+                  <span class="chk-sub">Tenderness or discomfort low down above the pubic bone</span>
+                </div>
+              </label>
+
+              <label class="chk-card span-2">
+                <input type="checkbox" id="ncHaematuria">
+                <div>
+                  <span class="chk-title">Visible blood in the urine</span>
+                  <span class="chk-sub">Pink, red, or brownish blood seen in urine or on wipe</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Group C: Non-Specific Signs -->
+          <div class="group-section group-divider">
+            <div class="group-header">
+              <span class="group-label" style="color:#78350F;">
+                <span class="dot-ind" style="background:#F59E0B;"></span>
+                Non-Specific Signs (Do NOT indicate UTI alone)
+              </span>
+              <span class="tag-box" style="color:#78350F; background:#FFFBEB; border-color:#FDE68A;">Check PINCH ME first</span>
+            </div>
+
+            <div class="grid-2">
+              <label class="chk-card chk-amber">
+                <input type="checkbox" id="ncConfusion" class="amber-chk">
+                <div>
+                  <span class="chk-title">New confusion, agitation, or drowsiness</span>
+                  <span class="chk-sub">Sudden delirium or change in behaviour without urinary pain</span>
+                </div>
+              </label>
+
+              <label class="chk-card chk-amber">
+                <input type="checkbox" id="ncSmellyDark" class="amber-chk">
+                <div>
+                  <span class="chk-title">Dark, cloudy, or strong-smelling urine</span>
+                  <span class="chk-sub">Usually caused by not drinking enough fluids or diet</span>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- CATHETERISED CHECKLIST -->
+        <div id="checklistCatheter" class="hidden group-section" style="gap:18px;">
+          <div class="group-section">
+            <div class="group-header">
+              <span class="group-label" style="color:var(--nhs-dark);">
+                <span class="dot-ind" style="background:var(--nhs-blue);"></span>
+                Catheter UTI Symptoms
+              </span>
+              <span class="tag-box" style="color:var(--nhs-dark); background:#EFF6FF; border-color:#BFDBFE;">Any 1 = Suspect CAUTI</span>
+            </div>
+
+            <label class="chk-card">
+              <input type="checkbox" id="catHaematuria">
+              <div>
+                <span class="chk-title">Visible blood in the catheter tubing or urine</span>
+                <span class="chk-sub">New pink, red, or frank blood draining through the catheter</span>
+              </div>
+            </label>
+
+            <label class="chk-card">
+              <input type="checkbox" id="catSuprapubic">
+              <div>
+                <span class="chk-title">New lower tummy / pelvic pain or discomfort</span>
+                <span class="chk-sub">Suprapubic tenderness or new bladder spasm pain</span>
+              </div>
+            </label>
+
+            <label class="chk-card">
+              <input type="checkbox" id="catRemoved48h">
+              <div>
+                <span class="chk-title">Catheter removed in last 48h: New pain passing urine, urgency, or frequency</span>
+                <span class="chk-sub">Post-catheter removal urinary symptoms</span>
+              </div>
+            </label>
+          </div>
+
+          <div class="group-section group-divider">
+            <div class="group-header">
+              <span class="group-label" style="color:#78350F;">
+                <span class="dot-ind" style="background:#F59E0B;"></span>
+                Catheter Checks &amp; Non-Specific Signs
+              </span>
+            </div>
+
+            <div class="grid-2">
+              <label class="chk-card chk-blue span-2">
+                <input type="checkbox" id="catOver7Days" checked>
+                <div>
+                  <span class="chk-title">Catheter has been in place MORE than 7 days</span>
+                  <span class="chk-sub">If CAUTI is suspected, catheter needs changing before/when taking a sample</span>
+                </div>
+              </label>
+
+              <label class="chk-card chk-amber">
+                <input type="checkbox" id="catConfusion" class="amber-chk">
+                <div>
+                  <span class="chk-title">New confusion, agitation, or behaviour change</span>
+                  <span class="chk-sub">Check catheter flow &amp; PINCH ME causes first</span>
+                </div>
+              </label>
+
+              <label class="chk-card chk-amber">
+                <input type="checkbox" id="catCloudySmelly" class="amber-chk">
+                <div>
+                  <span class="chk-title">Cloudy, smelly urine or sediment/grit</span>
+                  <span class="chk-sub">Normal in catheters — NOT a sign of UTI</span>
+                </div>
+              </label>
+
+              <label class="chk-card span-2">
+                <input type="checkbox" id="catCheckFlow">
+                <div>
+                  <span class="chk-title">Checked catheter flow: No kinks, twists, or blocked tubing</span>
+                  <span class="chk-sub">A blocked catheter causes bladder pain, agitation, and bypassing</span>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- STEP 4: Action Plan & Verdict Card -->
+    <section id="verdictSection" aria-live="polite" class="card" style="box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+      <div id="verdictHeader" class="verdict-top bg-verdict-green">
+        <div class="verdict-meta">
+          <span id="verdictPill" class="verdict-pill">GREEN — NO SIGNS OF UTI</span>
+          <span id="verdictCohortTag" style="font-size:0.75rem; font-weight:700;">No Catheter (65+)</span>
+        </div>
+        <h2 id="verdictTitle" class="verdict-title">No Signs of UTI — Do Not Collect a Urine Sample</h2>
+        <p id="verdictSummary" class="verdict-summary">No sepsis red flags or urinary infection symptoms are ticked. Continue normal care and hydration.</p>
+      </div>
+
+      <div class="card-body">
+        <div style="font-size:0.75rem; font-weight:800; text-transform:uppercase; color:var(--text-muted); letter-spacing:0.04em;">
+          What Care Staff Should Do Now:
+        </div>
+        <ul id="actionStepsList" class="action-list"></ul>
+
+        <div id="btnActionRow" class="btn-row">
+          <button id="copySbarBtn" type="button" class="btn-primary">
+            &#128203; <span id="copySbarBtnText">Copy SBAR Note for GP / Care Record</span>
+          </button>
+          <button id="shareSbarBtn" type="button" class="btn-secondary hidden">
+            &#8599; Share
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE PINCH ME CARD -->
+    <section id="pinchMeCard" class="hidden card card-sky">
+      <div class="card-body group-section">
+        <div>
+          <span class="pill" style="background:var(--sky-700); color:#fff; text-transform:uppercase;">Delirium &amp; Hydration Check</span>
+          <h3 style="margin:8px 0 4px; font-size:1rem; font-weight:800; color:#0C4A6E;">Run &lsquo;PINCH ME&rsquo; Before Suspecting a UTI</h3>
+          <p style="margin:0; font-size:0.8125rem; color:#075985;">
+            Tick off checks below and reassess in 24 hours:
+          </p>
+        </div>
+
+        <label class="pinch-item"><input type="checkbox" data-pinch="Pain checked (constipation, retention, injury)" class="pinch-chk"><span><strong>P — Pain:</strong> Checked for new pain, urinary retention, or fall/injury?</span></label>
+        <label class="pinch-item"><input type="checkbox" data-pinch="Infection elsewhere checked (chest, skin, viral)" class="pinch-chk"><span><strong>I — Infection elsewhere:</strong> Checked for cough/chest, skin redness, or viral illness?</span></label>
+        <label class="pinch-item"><input type="checkbox" data-pinch="Nutrition / blood sugar checked" class="pinch-chk"><span><strong>N — Nutrition:</strong> Eating well / blood glucose checked if diabetic?</span></label>
+        <label class="pinch-item"><input type="checkbox" data-pinch="Constipation / bowel chart reviewed" class="pinch-chk"><span><strong>C — Constipation:</strong> Checked bowel chart (constipation often mimics UTI)?</span></label>
+        <label class="pinch-item" style="border:2px solid #0284C7;"><input type="checkbox" data-pinch="Hydration: Offered extra oral fluids & monitoring output" class="pinch-chk"><span><strong>H — Hydration (KEY):</strong> Actively offering extra drinks &amp; monitoring?</span></label>
+        <label class="pinch-item"><input type="checkbox" data-pinch="Medication review flagged" class="pinch-chk"><span><strong>M — Medication:</strong> Any new, missed, or sedating medications?</span></label>
+        <label class="pinch-item"><input type="checkbox" data-pinch="Environment / routine changes checked" class="pinch-chk"><span><strong>E — Environment:</strong> Room move, poor sleep, or hearing aid/glasses missing?</span></label>
+      </div>
+    </section>
+
+    <!-- HOW TO COLLECT SAMPLE GUIDE -->
+    <section id="samplingGuideCard" class="hidden card card-blue">
+      <div class="card-header card-header-blue">
+        <h3 style="margin:0; font-size:0.95rem; font-weight:800;">How to Collect the Urine Sample Properly</h3>
+        <span class="pill" style="background:rgba(255,255,255,0.2); color:#fff;">UK SMI B 41</span>
+      </div>
+
+      <div id="sampleStepsNonCatheter" class="card-body group-section">
+        <div class="sample-step">
+          <span class="sample-num">1</span>
+          <div><strong>Collect BEFORE starting antibiotics</strong><div class="chk-sub">Unless a GP/paramedic says urgent sepsis treatment cannot wait.</div></div>
+        </div>
+        <div class="sample-step">
+          <span class="sample-num">2</span>
+          <div><strong>Clean-catch / Midstream Urine (MSU) only</strong><div class="chk-sub">Clean genital area with water. Catch midstream urine in a sterile receiver. <strong>NEVER squeeze urine from incontinence pads</strong> or collect from a non-sterile bedpan/commode.</div></div>
+        </div>
+        <div class="sample-step callout-amber">
+          <span class="sample-num" style="background:var(--amber-600); color:#fff;">3</span>
+          <div><strong style="color:#78350F;">Fill Red-Top Boric Acid tube strictly to the 10 mL line</strong><div class="chk-sub" style="color:#92400E;">Underfilling makes boric acid too concentrated, which <strong>kills the bacteria</strong> and causes a false-negative result. (If &lt;5 mL, use a plain white-top pot and refrigerate at 2–8&deg;C).</div></div>
+        </div>
+      </div>
+
+      <div id="sampleStepsCatheter" class="hidden card-body group-section">
+        <div class="callout-red">
+          <strong>NEVER take urine from the drainage bag!</strong> Bag urine contains old bacteria and gives a false result.
+        </div>
+        <div id="catReplaceStep" class="sample-step callout-amber">
+          <span class="sample-num" style="background:var(--amber-600); color:#fff;">1</span>
+          <div><strong style="color:#78350F;">Catheter in place &gt; 7 days: Change catheter first</strong><div class="chk-sub" style="color:#92400E;">Arrange for a trained nurse to replace the old catheter BEFORE collecting the sample and starting antibiotics.</div></div>
+        </div>
+        <div class="sample-step">
+          <span class="sample-num">2</span>
+          <div><strong>Use the Needleless Sampling Port</strong><div class="chk-sub">Briefly clamp tubing below port until fresh urine is visible. Wipe port with a <strong>70% alcohol wipe</strong> and let dry for 15 seconds. Aspirate with a sterile syringe.</div></div>
+        </div>
+        <div class="sample-step callout-amber" style="background:#EFF6FF; border-color:#BFDBFE;">
+          <span class="sample-num" style="background:var(--nhs-blue); color:#fff;">3</span>
+          <div><strong>Fill Red-Top Boric Acid tube strictly to the 10 mL line</strong><div class="chk-sub">Unclamp tubing immediately after sampling and label clearly as <strong>&ldquo;CSU — Catheter Specimen of Urine&rdquo;</strong>.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Collapsible Clinical Governance Drawer -->
+    <section class="card">
+      <button id="toggleEvidenceDrawerBtn" type="button" aria-expanded="false" class="drawer-btn">
+        <div>
+          <strong style="font-size:0.8rem; text-transform:uppercase; letter-spacing:0.03em; display:block;">Clinical Governance &amp; Evidence Grades</strong>
+          <span class="chk-sub">Tap to view UKHSA DDT, SIGN 160, NICE QS90 &amp; UK SMI B 41 details</span>
+        </div>
+        <span id="evidenceChevron" style="font-size:1.1rem; font-weight:800; color:var(--text-muted);">&#9662;</span>
+      </button>
+
+      <div id="evidenceDrawerContent" class="hidden card-body group-section" style="border-top:1px solid #E2E8F0;">
+        <div class="ev-box" style="background:#FEF2F2; border-color:#FECDD3;">
+          <strong>1. Ban on Urine Dipsticks in 65+ &amp; Catheters (UKHSA Grade A | SIGN 160 1++):</strong>
+          25–50% of care home residents and ~100% of long-term catheters have asymptomatic bacteriuria. Dipsticking drives false-positive diagnoses, unnecessary antibiotics, and <em>C. difficile</em> infection.
+        </div>
+        <div class="ev-box" style="background:#EFF6FF; border-color:#BFDBFE;">
+          <strong>2. Symptom Thresholds (UKHSA Grade B | SIGN 160 2+):</strong>
+          New dysuria alone, &ge;2 localised urinary symptoms, or systemic pyelonephritis/sepsis signs predict true UTI. Confusion or dark/smelly urine alone require PINCH ME &amp; hydration assessment first.
+        </div>
+        <div class="ev-box" style="background:#ECFDF5; border-color:#A7F3D0;">
+          <strong>3. Specimen Collection (UK SMI B 41 Issue 8.8):</strong>
+          Pre-antibiotic clean-catch MSU or aseptic catheter sampling port aspiration (never bag/pad), catheter change if in situ &gt;7 days, and filling Red-Top Boric Acid containers to the 10 mL line.
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    Care Home Clinical Decision Aid &bull; UKHSA, SIGN 160, NICE QS90/NG113 &amp; UK SMI B 41.<br>
+    Always escalate acutely deteriorating residents via local RESTORE2 / NHS 24 / 999 protocols.
+  </footer>
+
+  <!-- Sticky Bottom Action Bar for Smartphones -->
+  <div id="stickyBar" class="sticky-bar bg-verdict-green">
+    <div class="sticky-info">
+      <span id="stickyPill" class="sticky-kicker">GREEN — NO SIGNS OF UTI</span>
+      <span id="stickyTitle" class="sticky-text">Do Not Collect a Urine Sample</span>
+    </div>
+    <a href="#verdictSection" class="sticky-cta">View Action &darr;</a>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast" role="status">&#10003; SBAR Handover Note copied</div>
+
+  <script>
+    (function () {
+      const state = {
+        hasCatheter: false,
+        redFlags: { fever: false, rigors: false, loinPain: false, unwell: false },
+        nc: { dysuria: false, incontinence: false, urgency: false, frequency: false, suprapubic: false, haematuria: false, confusion: false, smellyDark: false },
+        cat: { haematuria: false, suprapubic: false, removed48h: false, over7Days: true, confusion: false, cloudySmelly: false, checkFlow: false }
+      };
+
+      const btnNoCatheter = document.getElementById('btnNoCatheter');
+      const btnHasCatheter = document.getElementById('btnHasCatheter');
+      const step3Title = document.getElementById('step3Title');
+      const step3Subtitle = document.getElementById('step3Subtitle');
+      const step3CountPill = document.getElementById('step3CountPill');
+      const ncOtherCountBadge = document.getElementById('ncOtherCountBadge');
+      const checklistNonCatheter = document.getElementById('checklistNonCatheter');
+      const checklistCatheter = document.getElementById('checklistCatheter');
+
+      const verdictHeader = document.getElementById('verdictHeader');
+      const verdictPill = document.getElementById('verdictPill');
+      const verdictCohortTag = document.getElementById('verdictCohortTag');
+      const verdictTitle = document.getElementById('verdictTitle');
+      const verdictSummary = document.getElementById('verdictSummary');
+      const actionStepsList = document.getElementById('actionStepsList');
+
+      const stickyBar = document.getElementById('stickyBar');
+      const stickyPill = document.getElementById('stickyPill');
+      const stickyTitle = document.getElementById('stickyTitle');
+
+      const pinchMeCard = document.getElementById('pinchMeCard');
+      const samplingGuideCard = document.getElementById('samplingGuideCard');
+      const sampleStepsNonCatheter = document.getElementById('sampleStepsNonCatheter');
+      const sampleStepsCatheter = document.getElementById('sampleStepsCatheter');
+      const catReplaceStep = document.getElementById('catReplaceStep');
+
+      const copySbarBtn = document.getElementById('copySbarBtn');
+      const copySbarBtnText = document.getElementById('copySbarBtnText');
+      const shareSbarBtn = document.getElementById('shareSbarBtn');
+      const btnActionRow = document.getElementById('btnActionRow');
+      const resetBtn = document.getElementById('resetBtn');
+      const toast = document.getElementById('toast');
+
+      const toggleEvidenceDrawerBtn = document.getElementById('toggleEvidenceDrawerBtn');
+      const evidenceDrawerContent = document.getElementById('evidenceDrawerContent');
+      const evidenceChevron = document.getElementById('evidenceChevron');
+
+      let latestSbarText = '';
+
+      // Enable native Share button on smartphones that support Web Share API
+      if (navigator.share) {
+        shareSbarBtn.classList.remove('hidden');
+        btnActionRow.classList.add('has-share');
+      }
+
+      function updateCatheterToggleUI() {
+        btnNoCatheter.setAttribute('aria-checked', String(!state.hasCatheter));
+        btnHasCatheter.setAttribute('aria-checked', String(state.hasCatheter));
+        btnNoCatheter.classList.toggle('active', !state.hasCatheter);
+        btnHasCatheter.classList.toggle('active', state.hasCatheter);
+
+        checklistNonCatheter.classList.toggle('hidden', state.hasCatheter);
+        checklistCatheter.classList.toggle('hidden', !state.hasCatheter);
+
+        if (!state.hasCatheter) {
+          step3Title.textContent = 'Tick New Urinary & General Signs';
+          step3Subtitle.textContent = 'For residents WITHOUT a urinary catheter (65+)';
+          verdictCohortTag.textContent = 'No Catheter (65+)';
+        } else {
+          step3Title.textContent = 'Tick Catheter Symptoms & Checks';
+          step3Subtitle.textContent = 'For residents WITH a catheter (or removed ≤48h)';
+          verdictCohortTag.textContent = 'Catheterised';
+        }
+      }
+
+      function renderDecision() {
+        updateCatheterToggleUI();
+
+        const activeRedFlags = [];
+        if (state.redFlags.fever) activeRedFlags.push('High/low temperature (>37.9°C, +1.5°C baseline, or ≤36.0°C)');
+        if (state.redFlags.rigors) activeRedFlags.push('Shaking chills (rigors)');
+        if (state.redFlags.loinPain) activeRedFlags.push('New lower back / loin pain');
+        if (state.redFlags.unwell) activeRedFlags.push('Acutely unwell / sepsis signs');
+        const hasRedFlags = activeRedFlags.length > 0;
+
+        let hasSuspectedUti = false;
+        let hasNonSpecificOnly = false;
+        const activeUrinarySymptoms = [];
+        const activeNonSpecific = [];
+
+        if (!state.hasCatheter) {
+          const otherUrinaryList = [];
+          if (state.nc.incontinence) otherUrinaryList.push('New or worse incontinence');
+          if (state.nc.urgency) otherUrinaryList.push('New urgency');
+          if (state.nc.frequency) otherUrinaryList.push('Passing urine much more often');
+          if (state.nc.suprapubic) otherUrinaryList.push('New lower tummy / pelvic pain');
+          if (state.nc.haematuria) otherUrinaryList.push('Visible blood in urine');
+
+          ncOtherCountBadge.textContent = `${otherUrinaryList.length} / 2 ticked`;
+          if (otherUrinaryList.length >= 2) {
+            ncOtherCountBadge.style.cssText = 'color:#065F46; background:#D1FAE5; border-color:#6EE7B7;';
+          } else {
+            ncOtherCountBadge.style.cssText = 'color:#003087; background:#EFF6FF; border-color:#BFDBFE;';
+          }
+
+          if (state.nc.dysuria) activeUrinarySymptoms.push('New pain/burning passing urine (dysuria)');
+          activeUrinarySymptoms.push(...otherUrinaryList);
+
+          if (state.nc.confusion) activeNonSpecific.push('New confusion, agitation, or drowsiness');
+          if (state.nc.smellyDark) activeNonSpecific.push('Dark, cloudy, or strong-smelling urine');
+
+          const totalTicked = activeUrinarySymptoms.length + activeNonSpecific.length;
+          step3CountPill.textContent = `${totalTicked} sign${totalTicked === 1 ? '' : 's'}`;
+
+          hasSuspectedUti = state.nc.dysuria || otherUrinaryList.length >= 2;
+          hasNonSpecificOnly = !hasRedFlags && !hasSuspectedUti && (activeNonSpecific.length > 0 || otherUrinaryList.length === 1);
+        } else {
+          if (state.cat.haematuria) activeUrinarySymptoms.push('Visible blood in catheter tubing/urine');
+          if (state.cat.suprapubic) activeUrinarySymptoms.push('New lower tummy / pelvic pain');
+          if (state.cat.removed48h) activeUrinarySymptoms.push('Post-removal dysuria, urgency, or frequency (≤48h)');
+
+          if (state.cat.confusion) activeNonSpecific.push('New confusion, agitation, or behaviour change');
+          if (state.cat.cloudySmelly) activeNonSpecific.push('Cloudy, smelly urine or sediment in tubing');
+
+          const totalTicked = activeUrinarySymptoms.length + activeNonSpecific.length;
+          step3CountPill.textContent = `${totalTicked} sign${totalTicked === 1 ? '' : 's'}`;
+
+          hasSuspectedUti = activeUrinarySymptoms.length >= 1;
+          hasNonSpecificOnly = !hasRedFlags && !hasSuspectedUti && activeNonSpecific.length > 0;
+        }
+
+        let bgClass = 'bg-verdict-green';
+        let pillText = '';
+        let titleText = '';
+        let summaryText = '';
+        let steps = [];
+        let showSamplingGuide = false;
+        let showPinchMe = false;
+
+        if (hasRedFlags) {
+          bgClass = 'bg-verdict-red';
+          pillText = 'RED ALERT — URGENT REVIEW';
+          titleText = 'Urgent Sepsis / Kidney Alert — Immediate Review';
+          summaryText = 'Resident has systemic red flags. Escalate immediately to GP / NHS 24 / 999 using RESTORE2 / NEWS2 observations.';
+          showSamplingGuide = true;
+          steps = [
+            '<strong>Escalate immediately:</strong> Contact GP urgently, NHS 24, or 999 if NEWS2 is high / acutely deteriorating.',
+            '<strong>Record full observations:</strong> Temp, pulse, BP, respiratory rate, O2 sats, and alertness (ACVPU).',
+            '<strong>Do NOT dipstick:</strong> Dipsticks do not rule out sepsis or kidney infection.',
+            state.hasCatheter
+              ? '<strong>Urgent catheter sample (if safe without delaying care):</strong> Needleless port into Red-Top Boric Acid (10 mL). Change catheter if >7 days.'
+              : '<strong>Urgent clean-catch MSU (if safe without delaying care):</strong> Fill Red-Top Boric Acid tube to 10 mL before antibiotics.'
+          ];
+        } else if (hasSuspectedUti) {
+          bgClass = 'bg-verdict-amber';
+          pillText = 'AMBER — SUSPECTED UTI';
+          titleText = 'Suspected UTI — Contact GP / ANP & Collect Sample';
+          summaryText = state.hasCatheter
+            ? 'Meets criteria for Catheter-Associated UTI (CAUTI). Collect a catheter port sample and contact GP/ANP.'
+            : 'Meets UKHSA symptom criteria for suspected UTI. Collect a clean-catch sample before antibiotics and contact GP/ANP.';
+          showSamplingGuide = true;
+
+          if (!state.hasCatheter) {
+            steps = [
+              '<strong>Do NOT dipstick:</strong> Proceed directly to collecting a clean-catch MSU sample.',
+              '<strong>Collect sample BEFORE antibiotics:</strong> Fill Red-Top Boric Acid tube strictly to 10 mL line.',
+              '<strong>Contact GP / ANP:</strong> Share the SBAR handover note below for targeted antibiotic review.',
+              '<strong>Encourage fluids &amp; monitor:</strong> Offer regular drinks and re-check observations if feverish or drowsy.'
+            ];
+          } else {
+            steps = [
+              '<strong>Check catheter tubing first:</strong> Ensure tubing is not kinked, twisted, or blocked.',
+              '<strong>Do NOT dipstick &amp; NEVER sample from bag:</strong> Use needleless port into Red-Top Boric Acid tube (10 mL).',
+              state.cat.over7Days
+                ? '<strong>Catheter &gt; 7 days old:</strong> Arrange for a trained nurse to replace catheter before/when sampling.'
+                : '<strong>Catheter &le; 7 days old:</strong> Aspirate aseptically from needleless sampling port.',
+              '<strong>Contact GP / ANP:</strong> Provide the SBAR handover note below for antibiotic review.'
+            ];
+          }
+        } else if (hasNonSpecificOnly) {
+          bgClass = 'bg-verdict-blue';
+          pillText = 'BLUE — DO NOT SAMPLE YET';
+          titleText = 'Do Not Suspect UTI Yet — Run PINCH ME & Hydration';
+          summaryText = 'Non-specific signs or a single mild symptom without dysuria are usually dehydration or another issue — NOT a UTI.';
+          showPinchMe = true;
+          steps = [
+            '<strong>Do NOT dipstick and do NOT collect a urine sample:</strong> Testing now detects harmless bacteria and drives unnecessary antibiotics.',
+            '<strong>Offer extra oral fluids:</strong> Encourage small, frequent drinks over the next 24 hours.',
+            state.hasCatheter
+              ? '<strong>Check catheter drainage &amp; flow:</strong> Ensure catheter drains freely with no kinks or blockage.'
+              : '<strong>Complete PINCH ME checklist below:</strong> Check pain, constipation, chest/skin infection, or medications.',
+            '<strong>Reassess within 24 hours:</strong> Contact GP sooner if new urinary pain or Red Flags develop.'
+          ];
+        } else {
+          bgClass = 'bg-verdict-green';
+          pillText = 'GREEN — NO SIGNS OF UTI';
+          titleText = 'No Signs of UTI — Do Not Collect a Urine Sample';
+          summaryText = 'No sepsis red flags or urinary infection symptoms ticked. Continue routine care and hydration.';
+          steps = [
+            '<strong>Do NOT dipstick urine</strong> and do not send routine urine samples.',
+            '<strong>Support daily hydration:</strong> Keep fresh drinks within easy reach.',
+            state.hasCatheter
+              ? '<strong>Routine catheter care:</strong> Keep bag below bladder level and tubing free from kinks.'
+              : '<strong>Re-check if symptoms change:</strong> Re-run check if dysuria, fever, or sudden confusion develops.'
+          ];
+        }
+
+        verdictHeader.className = `verdict-top ${bgClass}`;
+        stickyBar.className = `sticky-bar ${bgClass}`;
+
+        verdictPill.textContent = pillText;
+        stickyPill.textContent = pillText;
+        verdictTitle.innerHTML = titleText;
+        stickyTitle.textContent = verdictTitle.textContent;
+        verdictSummary.textContent = summaryText;
+
+        actionStepsList.innerHTML = steps.map(step => `
+          <li>
+            <span class="check-circle">&check;</span>
+            <span>${step}</span>
+          </li>
+        `).join('');
+
+        pinchMeCard.classList.toggle('hidden', !showPinchMe);
+        samplingGuideCard.classList.toggle('hidden', !showSamplingGuide);
+
+        if (showSamplingGuide) {
+          sampleStepsNonCatheter.classList.toggle('hidden', state.hasCatheter);
+          sampleStepsCatheter.classList.toggle('hidden', !state.hasCatheter);
+          catReplaceStep.classList.toggle('hidden', !state.cat.over7Days);
+        }
+
+        const residentTypeStr = state.hasCatheter
+          ? `Catheterised Resident (${state.cat.over7Days ? 'Catheter in situ >7 days' : 'Catheter in situ ≤7 days'})`
+          : `Non-Catheterised Care Home Resident (Aged 65+)`;
+
+        const activePinchItems = Array.from(document.querySelectorAll('.pinch-chk:checked')).map(c => c.dataset.pinch);
+
+        latestSbarText = [
+          `CARE HOME UTI ASSESSMENT — SBAR HANDOVER`,
+          `----------------------------------------`,
+          `[S] SITUATION:`,
+          `• Resident Group: ${residentTypeStr}`,
+          `• Outcome: ${pillText} — ${verdictTitle.textContent}`,
+          ``,
+          `[B] BACKGROUND:`,
+          `• Sepsis / Red Flags: ${hasRedFlags ? activeRedFlags.join('; ') : 'None (no fever >37.9°C, rigors, loin pain, or sepsis signs)'}`,
+          `• Urine Dipstick: NOT PERFORMED (UKHSA / SIGN 160 / NICE QS90)`,
+          ``,
+          `[A] ASSESSMENT:`,
+          `• Urinary Symptoms: ${activeUrinarySymptoms.length > 0 ? activeUrinarySymptoms.join('; ') : 'None'}`,
+          `• Non-Specific Signs: ${activeNonSpecific.length > 0 ? activeNonSpecific.join('; ') : 'None'}`,
+          state.hasCatheter ? `• Catheter Flow Checked: ${state.cat.checkFlow ? 'Yes — patent' : 'Pending check'}` : null,
+          ``,
+          `[R] RECOMMENDATION & ACTIONS:`,
+          showSamplingGuide
+            ? `• Sample: Collecting ${state.hasCatheter ? 'catheter port specimen (CSU)' : 'clean-catch MSU'} into Red-Top Boric Acid (10 mL line) before antibiotics.${state.hasCatheter && state.cat.over7Days ? ' Catheter >7 days — arranging change.' : ''}`
+            : `• Sample: NOT collected (UTI criteria not met).`,
+          activePinchItems.length > 0
+            ? `• PINCH ME Checks: ${activePinchItems.join('; ')}`
+            : (showPinchMe ? `• PINCH ME & Hydration: Commencing oral hydration push & 24h review.` : `• Ongoing Care: Monitoring observations & hydration.`)
+        ].filter(line => line !== null).join('\n');
+      }
+
+      btnNoCatheter.addEventListener('click', () => { state.hasCatheter = false; renderDecision(); });
+      btnHasCatheter.addEventListener('click', () => { state.hasCatheter = true; renderDecision(); });
+
+      document.getElementById('rfFever').addEventListener('change', e => { state.redFlags.fever = e.target.checked; renderDecision(); });
+      document.getElementById('rfRigors').addEventListener('change', e => { state.redFlags.rigors = e.target.checked; renderDecision(); });
+      document.getElementById('rfLoinPain').addEventListener('change', e => { state.redFlags.loinPain = e.target.checked; renderDecision(); });
+      document.getElementById('rfUnwell').addEventListener('change', e => { state.redFlags.unwell = e.target.checked; renderDecision(); });
+
+      document.getElementById('ncDysuria').addEventListener('change', e => { state.nc.dysuria = e.target.checked; renderDecision(); });
+      document.getElementById('ncIncontinence').addEventListener('change', e => { state.nc.incontinence = e.target.checked; renderDecision(); });
+      document.getElementById('ncUrgency').addEventListener('change', e => { state.nc.urgency = e.target.checked; renderDecision(); });
+      document.getElementById('ncFrequency').addEventListener('change', e => { state.nc.frequency = e.target.checked; renderDecision(); });
+      document.getElementById('ncSuprapubic').addEventListener('change', e => { state.nc.suprapubic = e.target.checked; renderDecision(); });
+      document.getElementById('ncHaematuria').addEventListener('change', e => { state.nc.haematuria = e.target.checked; renderDecision(); });
+      document.getElementById('ncConfusion').addEventListener('change', e => { state.nc.confusion = e.target.checked; renderDecision(); });
+      document.getElementById('ncSmellyDark').addEventListener('change', e => { state.nc.smellyDark = e.target.checked; renderDecision(); });
+
+      document.getElementById('catHaematuria').addEventListener('change', e => { state.cat.haematuria = e.target.checked; renderDecision(); });
+      document.getElementById('catSuprapubic').addEventListener('change', e => { state.cat.suprapubic = e.target.checked; renderDecision(); });
+      document.getElementById('catRemoved48h').addEventListener('change', e => { state.cat.removed48h = e.target.checked; renderDecision(); });
+      document.getElementById('catOver7Days').addEventListener('change', e => { state.cat.over7Days = e.target.checked; renderDecision(); });
+      document.getElementById('catConfusion').addEventListener('change', e => { state.cat.confusion = e.target.checked; renderDecision(); });
+      document.getElementById('catCloudySmelly').addEventListener('change', e => { state.cat.cloudySmelly = e.target.checked; renderDecision(); });
+      document.getElementById('catCheckFlow').addEventListener('change', e => { state.cat.checkFlow = e.target.checked; renderDecision(); });
+
+      document.querySelectorAll('.pinch-chk').forEach(chk => chk.addEventListener('change', renderDecision));
+
+      function showToast(msg) {
+        toast.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2400);
+      }
+
+      copySbarBtn.addEventListener('click', async () => {
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(latestSbarText);
+          } else {
+            const ta = document.createElement('textarea');
+            ta.value = latestSbarText;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+          }
+          copySbarBtnText.textContent = 'SBAR Note Copied!';
+          showToast('✓ SBAR Handover Note copied');
+          setTimeout(() => { copySbarBtnText.textContent = 'Copy SBAR Note for GP / Care Record'; }, 2400);
+        } catch (e) {
+          showToast('Unable to copy automatically');
+        }
+      });
+
+      shareSbarBtn.addEventListener('click', async () => {
+        try {
+          await navigator.share({
+            title: 'Care Home UTI Assessment — SBAR',
+            text: latestSbarText
+          });
+        } catch (err) {
+          // User cancelled share sheet
+        }
+      });
+
+      resetBtn.addEventListener('click', () => {
+        state.hasCatheter = false;
+        state.redFlags = { fever: false, rigors: false, loinPain: false, unwell: false };
+        state.nc = { dysuria: false, incontinence: false, urgency: false, frequency: false, suprapubic: false, haematuria: false, confusion: false, smellyDark: false };
+        state.cat = { haematuria: false, suprapubic: false, removed48h: false, over7Days: true, confusion: false, cloudySmelly: false, checkFlow: false };
+        document.querySelectorAll('input[type="checkbox"]').forEach(chk => { chk.checked = (chk.id === 'catOver7Days'); });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        renderDecision();
+      });
+
+      toggleEvidenceDrawerBtn.addEventListener('click', () => {
+        const isExpanded = toggleEvidenceDrawerBtn.getAttribute('aria-expanded') === 'true';
+        toggleEvidenceDrawerBtn.setAttribute('aria-expanded', String(!isExpanded));
+        evidenceDrawerContent.classList.toggle('hidden', isExpanded);
+        evidenceChevron.innerHTML = isExpanded ? '&#9662;' : '&#9652;';
+      });
+
+      renderDecision();
+
+      // Register Service Worker for Offline PWA Capability
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js').catch(() => {});
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
