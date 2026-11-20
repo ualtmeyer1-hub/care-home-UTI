@@ -14,12 +14,12 @@
   <link rel="manifest" href="./manifest.json">
   <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='112' fill='%23003087'/%3E%3Cpath d='M256 96L112 208v192a16 16 0 0016 16h80V288h96v128h80a16 16 0 0016-16V208L256 96z' fill='none' stroke='%235eead4' stroke-width='28' stroke-linejoin='round'/%3E%3Ctext x='256' y='245' font-family='system-ui,sans-serif' font-weight='900' font-size='76' fill='%23ffffff' text-anchor='middle'%3EUTI%3C/text%3E%3C/svg%3E">
 
-<!-- Privacy-friendly analytics by Plausible -->
-<script async src="https://plausible.io/js/pa-whexiMUof-O36uTtqLx5x.js"></script>
-<script>
-  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
-  plausible.init()
-</script>
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script async src="https://plausible.io/js/pa-whexiMUof-O36uTtqLx5x.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+  </script>
 
   <style>
     :root {
@@ -480,6 +480,107 @@
       justify-content: center;
       gap: 6px;
     }
+    .btn-family {
+      width: 100%;
+      min-height: 46px;
+      padding: 10px 16px;
+      border-radius: 12px;
+      border: 2px solid var(--nhs-teal);
+      background: var(--emerald-50);
+      color: var(--nhs-teal);
+      font-size: 0.875rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .btn-family:active { background: #D1FAE5; }
+
+    /* Family QR Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.72);
+      z-index: 80;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .modal-card {
+      background: #FFFFFF;
+      border-radius: 20px;
+      max-width: 400px;
+      width: 100%;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      background: #F1F5F9;
+      color: #334155;
+      font-size: 1.25rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .qr-box {
+      background: #FFFFFF;
+      border: 2px solid #E2E8F0;
+      border-radius: 14px;
+      padding: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 12px 0;
+    }
+    .qr-box img {
+      width: 200px;
+      height: 200px;
+      display: block;
+    }
+    .modal-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .btn-modal {
+      min-height: 44px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+    .btn-modal-primary {
+      background: var(--nhs-dark);
+      color: #fff;
+      border: none;
+    }
+    .btn-modal-outline {
+      background: #fff;
+      color: var(--nhs-dark);
+      border: 2px solid var(--nhs-dark);
+    }
 
     /* PINCH ME & Sampling Steps */
     .pinch-item {
@@ -614,7 +715,7 @@
       padding: 12px 18px;
       border-radius: 12px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-      z-index: 60;
+      z-index: 95;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.2s ease;
@@ -969,6 +1070,14 @@
             &#8599; Share
           </button>
         </div>
+
+        <!-- Family Info Guide & QR Code Trigger (Shown on GREEN & BLUE outcomes) -->
+        <button id="openFamilyGuideModalBtn" type="button" class="btn-family">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
+          </svg>
+          <span>Share Info Guide &amp; QR with Family</span>
+        </button>
       </div>
     </section>
 
@@ -1076,6 +1185,35 @@
     <a id="viewActionLink" href="#verdictSection" class="sticky-cta">View Action &darr;</a>
   </div>
 
+  <!-- Family Info Guide & QR Code Modal -->
+  <div id="familyGuideModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="familyModalTitle">
+    <div class="modal-card">
+      <button id="closeFamilyModalBtn" type="button" class="modal-close" aria-label="Close modal">&times;</button>
+      <span class="pill" style="background:#EFF6FF; color:var(--nhs-dark); text-transform:uppercase;">NHS Ayrshire &amp; Arran</span>
+      <h3 id="familyModalTitle" style="margin:8px 0 4px; font-size:1.05rem; font-weight:800; color:var(--text-main);">
+        Patient &amp; Family Urine Test Guide
+      </h3>
+      <p style="margin:0; font-size:0.8125rem; color:var(--text-muted);">
+        Ask visiting family members to scan this QR code, or send them the link directly:
+      </p>
+
+      <div class="qr-box">
+        <img id="familyQrImg" src="" alt="QR code for NHS Ayrshire & Arran Patient & Family Urine Test Guide">
+      </div>
+
+      <div id="familyUrlText" style="font-size:0.72rem; color:var(--text-muted); word-break:break-all; background:#F8FAFC; padding:6px 10px; border-radius:8px; border:1px solid #E2E8F0;"></div>
+
+      <div class="modal-actions">
+        <button id="shareFamilyLinkBtn" type="button" class="btn-modal btn-modal-primary">
+          &#8599; Share / Copy Link
+        </button>
+        <a id="openFamilyPageLink" href="./family.html" target="_blank" rel="noopener" class="btn-modal btn-modal-outline">
+          Open Guide &rarr;
+        </a>
+      </div>
+    </div>
+  </div>
+
   <!-- Toast -->
   <div id="toast" class="toast" role="status">&#10003; SBAR Handover Note copied</div>
 
@@ -1143,6 +1281,21 @@
       const toggleEvidenceDrawerBtn = document.getElementById('toggleEvidenceDrawerBtn');
       const evidenceDrawerContent = document.getElementById('evidenceDrawerContent');
       const evidenceChevron = document.getElementById('evidenceChevron');
+
+      // Family Guide Modal elements
+      const openFamilyGuideModalBtn = document.getElementById('openFamilyGuideModalBtn');
+      const familyGuideModal = document.getElementById('familyGuideModal');
+      const closeFamilyModalBtn = document.getElementById('closeFamilyModalBtn');
+      const familyQrImg = document.getElementById('familyQrImg');
+      const familyUrlText = document.getElementById('familyUrlText');
+      const shareFamilyLinkBtn = document.getElementById('shareFamilyLinkBtn');
+      const openFamilyPageLink = document.getElementById('openFamilyPageLink');
+
+      // Dynamically resolve full URL to family.html in the same repository directory
+      const familyGuideUrl = new URL('./family.html', window.location.href).href;
+      familyUrlText.textContent = familyGuideUrl;
+      openFamilyPageLink.href = familyGuideUrl;
+      familyQrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=6&data=${encodeURIComponent(familyGuideUrl)}`;
 
       let latestSbarText = '';
       let currentOutcomeCode = 'GREEN';
@@ -1336,6 +1489,10 @@
           </li>
         `).join('');
 
+        // Show Family Guide & QR button on GREEN and BLUE outcomes (when urine test is NOT indicated)
+        const showFamilyBtn = (currentOutcomeCode === 'GREEN' || currentOutcomeCode === 'BLUE');
+        openFamilyGuideModalBtn.classList.toggle('hidden', !showFamilyBtn);
+
         pinchMeCard.classList.toggle('hidden', !showPinchMe);
         samplingGuideCard.classList.toggle('hidden', !showSamplingGuide);
 
@@ -1468,6 +1625,44 @@
         } catch (err) {
           // User cancelled share sheet
         }
+      });
+
+      // Family Guide Modal interactions
+      openFamilyGuideModalBtn.addEventListener('click', () => {
+        familyGuideModal.classList.remove('hidden');
+        trackEvent('Family QR Opened', { outcome: currentOutcomeCode });
+      });
+
+      closeFamilyModalBtn.addEventListener('click', () => {
+        familyGuideModal.classList.add('hidden');
+      });
+
+      familyGuideModal.addEventListener('click', (e) => {
+        if (e.target === familyGuideModal) {
+          familyGuideModal.classList.add('hidden');
+        }
+      });
+
+      shareFamilyLinkBtn.addEventListener('click', async () => {
+        trackEvent('Family Link Shared From App', { outcome: currentOutcomeCode });
+        try {
+          if (navigator.share) {
+            await navigator.share({
+              title: 'Understanding Your Urine Test — NHS Ayrshire & Arran',
+              text: 'Helpful NHS Ayrshire & Arran guide for families on urine tests and UTIs:',
+              url: familyGuideUrl
+            });
+          } else if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(familyGuideUrl);
+            showToast('✓ Family guide link copied');
+          }
+        } catch (err) {
+          // User cancelled share sheet
+        }
+      });
+
+      openFamilyPageLink.addEventListener('click', () => {
+        trackEvent('Family Guide Opened From App', { outcome: currentOutcomeCode });
       });
 
       resetBtn.addEventListener('click', () => {

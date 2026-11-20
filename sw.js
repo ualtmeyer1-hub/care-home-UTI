@@ -1,7 +1,8 @@
-const CACHE_NAME = 'care-home-uti-pwa-v2';
+const CACHE_NAME = 'care-home-uti-pwa-v4';
 const ASSETS = [
   './',
   './index.html',
+  './family.html',
   './manifest.json'
 ];
 
