@@ -1,4 +1,4 @@
-const CACHE_NAME = 'care-home-uti-pwa-v1';
+const CACHE_NAME = 'care-home-uti-pwa-v2';
 const ASSETS = [
   './',
   './index.html',

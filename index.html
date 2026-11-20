@@ -14,6 +14,12 @@
   <link rel="manifest" href="./manifest.json">
   <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='112' fill='%23003087'/%3E%3Cpath d='M256 96L112 208v192a16 16 0 0016 16h80V288h96v128h80a16 16 0 0016-16V208L256 96z' fill='none' stroke='%235eead4' stroke-width='28' stroke-linejoin='round'/%3E%3Ctext x='256' y='245' font-family='system-ui,sans-serif' font-weight='900' font-size='76' fill='%23ffffff' text-anchor='middle'%3EUTI%3C/text%3E%3C/svg%3E">
 
+  <!-- Plausible Privacy-Friendly Analytics (Replace data-domain with your live github.io domain e.g. username.github.io) -->
+  <script defer data-domain="ualtmeyer1-hub.github.io/care-home-UTI/" src="https://plausible.io/js/script.tagged-events.js"></script>
+  <script>
+    window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) };
+  </script>
+
   <style>
     :root {
       --nhs-dark: #003087;
@@ -113,7 +119,7 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      shrink: 0;
+      flex-shrink: 0;
       min-height: 44px;
     }
     .btn-reset:active { background: rgba(255,255,255,0.28); }
@@ -1066,7 +1072,7 @@
       <span id="stickyPill" class="sticky-kicker">GREEN — NO SIGNS OF UTI</span>
       <span id="stickyTitle" class="sticky-text">Do Not Collect a Urine Sample</span>
     </div>
-    <a href="#verdictSection" class="sticky-cta">View Action &darr;</a>
+    <a id="viewActionLink" href="#verdictSection" class="sticky-cta">View Action &darr;</a>
   </div>
 
   <!-- Toast -->
@@ -1074,6 +1080,24 @@
 
   <script>
     (function () {
+      // Lightweight, anonymous Plausible custom event helper (no PII ever sent)
+      const trackedMilestones = new Set();
+      function trackEvent(eventName, props) {
+        try {
+          if (typeof window.plausible === 'function') {
+            window.plausible(eventName, props ? { props: props } : undefined);
+          }
+        } catch (e) {
+          // Silently ignore if offline or blocked
+        }
+      }
+      function trackOncePerCheck(key, eventName, props) {
+        if (!trackedMilestones.has(key)) {
+          trackedMilestones.add(key);
+          trackEvent(eventName, props);
+        }
+      }
+
       const state = {
         hasCatheter: false,
         redFlags: { fever: false, rigors: false, loinPain: false, unwell: false },
@@ -1100,6 +1124,7 @@
       const stickyBar = document.getElementById('stickyBar');
       const stickyPill = document.getElementById('stickyPill');
       const stickyTitle = document.getElementById('stickyTitle');
+      const viewActionLink = document.getElementById('viewActionLink');
 
       const pinchMeCard = document.getElementById('pinchMeCard');
       const samplingGuideCard = document.getElementById('samplingGuideCard');
@@ -1119,6 +1144,7 @@
       const evidenceChevron = document.getElementById('evidenceChevron');
 
       let latestSbarText = '';
+      let currentOutcomeCode = 'GREEN';
 
       // Enable native Share button on smartphones that support Web Share API
       if (navigator.share) {
@@ -1211,6 +1237,7 @@
         let showPinchMe = false;
 
         if (hasRedFlags) {
+          currentOutcomeCode = 'RED';
           bgClass = 'bg-verdict-red';
           pillText = 'RED ALERT — URGENT REVIEW';
           titleText = 'Urgent Sepsis / Kidney Alert — Immediate Review';
@@ -1225,6 +1252,7 @@
               : '<strong>Urgent clean-catch MSU (if safe without delaying care):</strong> Fill Red-Top Boric Acid tube to 10 mL before antibiotics.'
           ];
         } else if (hasSuspectedUti) {
+          currentOutcomeCode = 'AMBER';
           bgClass = 'bg-verdict-amber';
           pillText = 'AMBER — SUSPECTED UTI';
           titleText = 'Suspected UTI — Contact GP / ANP & Collect Sample';
@@ -1251,6 +1279,7 @@
             ];
           }
         } else if (hasNonSpecificOnly) {
+          currentOutcomeCode = 'BLUE';
           bgClass = 'bg-verdict-blue';
           pillText = 'BLUE — DO NOT SAMPLE YET';
           titleText = 'Do Not Suspect UTI Yet — Run PINCH ME & Hydration';
@@ -1265,6 +1294,7 @@
             '<strong>Reassess within 24 hours:</strong> Contact GP sooner if new urinary pain or Red Flags develop.'
           ];
         } else {
+          currentOutcomeCode = 'GREEN';
           bgClass = 'bg-verdict-green';
           pillText = 'GREEN — NO SIGNS OF UTI';
           titleText = 'No Signs of UTI — Do Not Collect a Urine Sample';
@@ -1276,6 +1306,17 @@
               ? '<strong>Routine catheter care:</strong> Keep bag below bladder level and tubing free from kinks.'
               : '<strong>Re-check if symptoms change:</strong> Re-run check if dysuria, fever, or sudden confusion develops.'
           ];
+        }
+
+        // Track when a user actively engages with symptoms/red flags (first interaction in a session)
+        if (currentOutcomeCode !== 'GREEN') {
+          trackOncePerCheck('assessment_started', 'Assessment Started', {
+            cohort: state.hasCatheter ? 'Catheterised' : 'Non-Catheterised'
+          });
+          trackOncePerCheck('outcome_' + currentOutcomeCode, 'Outcome Reached', {
+            outcome: currentOutcomeCode,
+            cohort: state.hasCatheter ? 'Catheterised' : 'Non-Catheterised'
+          });
         }
 
         verdictHeader.className = `verdict-top ${bgClass}`;
@@ -1335,8 +1376,16 @@
         ].filter(line => line !== null).join('\n');
       }
 
-      btnNoCatheter.addEventListener('click', () => { state.hasCatheter = false; renderDecision(); });
-      btnHasCatheter.addEventListener('click', () => { state.hasCatheter = true; renderDecision(); });
+      btnNoCatheter.addEventListener('click', () => {
+        state.hasCatheter = false;
+        trackOncePerCheck('cohort_nocath', 'Cohort Selected', { cohort: 'Non-Catheterised' });
+        renderDecision();
+      });
+      btnHasCatheter.addEventListener('click', () => {
+        state.hasCatheter = true;
+        trackOncePerCheck('cohort_cath', 'Cohort Selected', { cohort: 'Catheterised' });
+        renderDecision();
+      });
 
       document.getElementById('rfFever').addEventListener('change', e => { state.redFlags.fever = e.target.checked; renderDecision(); });
       document.getElementById('rfRigors').addEventListener('change', e => { state.redFlags.rigors = e.target.checked; renderDecision(); });
@@ -1360,7 +1409,18 @@
       document.getElementById('catCloudySmelly').addEventListener('change', e => { state.cat.cloudySmelly = e.target.checked; renderDecision(); });
       document.getElementById('catCheckFlow').addEventListener('change', e => { state.cat.checkFlow = e.target.checked; renderDecision(); });
 
-      document.querySelectorAll('.pinch-chk').forEach(chk => chk.addEventListener('change', renderDecision));
+      document.querySelectorAll('.pinch-chk').forEach(chk => {
+        chk.addEventListener('change', () => {
+          trackOncePerCheck('pinch_me_used', 'PINCH ME Completed');
+          renderDecision();
+        });
+      });
+
+      viewActionLink.addEventListener('click', () => {
+        trackOncePerCheck('viewed_action_' + currentOutcomeCode, 'Viewed Action Plan', {
+          outcome: currentOutcomeCode
+        });
+      });
 
       function showToast(msg) {
         toast.textContent = msg;
@@ -1369,6 +1429,10 @@
       }
 
       copySbarBtn.addEventListener('click', async () => {
+        trackEvent('SBAR Copied', {
+          outcome: currentOutcomeCode,
+          cohort: state.hasCatheter ? 'Catheterised' : 'Non-Catheterised'
+        });
         try {
           if (navigator.clipboard && navigator.clipboard.writeText) {
             await navigator.clipboard.writeText(latestSbarText);
@@ -1391,6 +1455,10 @@
       });
 
       shareSbarBtn.addEventListener('click', async () => {
+        trackEvent('SBAR Shared', {
+          outcome: currentOutcomeCode,
+          cohort: state.hasCatheter ? 'Catheterised' : 'Non-Catheterised'
+        });
         try {
           await navigator.share({
             title: 'Care Home UTI Assessment — SBAR',
@@ -1402,6 +1470,7 @@
       });
 
       resetBtn.addEventListener('click', () => {
+        trackedMilestones.clear();
         state.hasCatheter = false;
         state.redFlags = { fever: false, rigors: false, loinPain: false, unwell: false };
         state.nc = { dysuria: false, incontinence: false, urgency: false, frequency: false, suprapubic: false, haematuria: false, confusion: false, smellyDark: false };
@@ -1413,6 +1482,9 @@
 
       toggleEvidenceDrawerBtn.addEventListener('click', () => {
         const isExpanded = toggleEvidenceDrawerBtn.getAttribute('aria-expanded') === 'true';
+        if (!isExpanded) {
+          trackOncePerCheck('evidence_opened', 'Evidence Drawer Opened');
+        }
         toggleEvidenceDrawerBtn.setAttribute('aria-expanded', String(!isExpanded));
         evidenceDrawerContent.classList.toggle('hidden', isExpanded);
         evidenceChevron.innerHTML = isExpanded ? '&#9662;' : '&#9652;';
