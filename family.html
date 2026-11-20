@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Understanding Your Urine Test — NHS Ayrshire &amp; Arran</title>
+
+  <!-- Mobile Web App Meta Tags -->
+  <meta name="theme-color" content="#003087">
+  <meta name="description" content="Understanding Your Urine Test: Getting the Right Care for Urine Infections (UTIs) — A Guide for Patients and Families from NHS Ayrshire & Arran.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Urine Test Guide">
+
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script async src="https://plausible.io/js/pa-whexiMUof-O36uTtqLx5x.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+  </script>
+
+  <style>
+    :root {
+      --nhs-dark: #003087;
+      --nhs-blue: #005EB8;
+      --nhs-light-blue: #EFF6FF;
+      --nhs-teal: #006747;
+      --bg-page: #F1F5F9;
+      --text-main: #0F172A;
+      --text-muted: #475569;
+      --card-bg: #FFFFFF;
+      --red-600: #DC2626;
+      --red-50: #FEF2F2;
+      --amber-600: #D97706;
+      --amber-50: #FFFBEB;
+      --emerald-700: #047857;
+      --emerald-50: #ECFDF5;
+      --sky-700: #0369A1;
+      --sky-50: #F0F9FF;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.55;
+      font-size: 16px;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding-bottom: calc(32px + env(safe-area-inset-bottom));
+    }
+
+    .hidden { display: none !important; }
+
+    /* Header */
+    .app-header {
+      background: var(--nhs-dark);
+      color: #fff;
+      padding: calc(16px + env(safe-area-inset-top)) 16px 20px;
+      border-bottom: 4px solid var(--nhs-blue);
+    }
+    .header-inner {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .nhs-pill {
+      display: inline-block;
+      background: #FFFFFF;
+      color: var(--nhs-dark);
+      font-weight: 900;
+      font-style: italic;
+      font-size: 0.85rem;
+      padding: 2px 9px;
+      border-radius: 4px;
+      letter-spacing: 0.03em;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+    .board-name {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #DBEAFE;
+      vertical-align: middle;
+    }
+    .app-title {
+      margin: 10px 0 6px;
+      font-size: 1.35rem;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+    .app-subtitle {
+      margin: 0;
+      font-size: 0.92rem;
+      color: #E0F2FE;
+      line-height: 1.45;
+    }
+
+    /* Container */
+    .container {
+      max-width: 760px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      border: 1px solid #E2E8F0;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+    .card-body { padding: 18px 16px; }
+    .card-header {
+      background: #F8FAFC;
+      border-bottom: 1px solid #E2E8F0;
+      padding: 14px 16px;
+    }
+    .card-header h2 {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--nhs-dark);
+    }
+    .card-header p {
+      margin: 3px 0 0;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+    }
+
+    /* Intro Reassurance */
+    .intro-box {
+      background: #FFFFFF;
+      border-left: 5px solid var(--nhs-blue);
+      border-radius: 14px;
+      padding: 16px;
+      font-size: 0.94rem;
+      color: #1E293B;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .intro-box p { margin: 0; }
+
+    /* Interactive "What Have You Noticed?" Tap Cards */
+    .scenario-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    @media (min-width: 600px) {
+      .scenario-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .scenario-btn {
+      width: 100%;
+      text-align: left;
+      background: #FFFFFF;
+      border: 2px solid #CBD5E1;
+      border-radius: 14px;
+      padding: 14px 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 60px;
+      transition: all 0.15s ease;
+    }
+    .scenario-btn:hover { border-color: var(--nhs-blue); background: #F8FAFC; }
+    .scenario-btn.active {
+      border-color: var(--nhs-blue);
+      background: var(--nhs-light-blue);
+      box-shadow: 0 2px 8px rgba(0,94,184,0.12);
+    }
+    .scenario-btn.active-urgent {
+      border-color: var(--red-600);
+      background: var(--red-50);
+    }
+    .scenario-label {
+      font-weight: 800;
+      font-size: 0.94rem;
+      color: var(--text-main);
+      display: block;
+    }
+    .scenario-hint {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 2px;
+    }
+    .scenario-arrow {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--nhs-blue);
+      flex-shrink: 0;
+    }
+
+    /* Dynamic Answer Box */
+    .answer-panel {
+      margin-top: 14px;
+      border-radius: 14px;
+      padding: 16px;
+      border: 2px solid;
+      animation: fadeIn 0.2s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .ans-sky { background: var(--sky-50); border-color: #38BDF8; color: #0C4A6E; }
+    .ans-amber { background: var(--amber-50); border-color: #FBBF24; color: #78350F; }
+    .ans-red { background: var(--red-50); border-color: #F87171; color: #7F1D1D; }
+    .ans-green { background: var(--emerald-50); border-color: #34D399; color: #064E3B; }
+
+    .ans-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 3px 9px;
+      border-radius: 999px;
+      margin-bottom: 8px;
+    }
+    .badge-sky { background: var(--sky-700); color: #fff; }
+    .badge-amber { background: var(--amber-600); color: #fff; }
+    .badge-red { background: var(--red-600); color: #fff; }
+    .badge-green { background: var(--emerald-700); color: #fff; }
+
+    .answer-panel h3 {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+      font-weight: 800;
+    }
+    .answer-panel p {
+      margin: 0 0 10px;
+      font-size: 0.92rem;
+    }
+    .answer-panel p:last-child { margin-bottom: 0; }
+
+    /* Accordion / Expandable Sections */
+    .accordion-item {
+      border-bottom: 1px solid #E2E8F0;
+    }
+    .accordion-item:last-child { border-bottom: none; }
+
+    .acc-btn {
+      width: 100%;
+      background: #FFFFFF;
+      border: none;
+      padding: 16px;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 58px;
+    }
+    .acc-btn:hover { background: #F8FAFC; }
+    .acc-title {
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: var(--nhs-dark);
+    }
+    .acc-chev {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--nhs-blue);
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+    }
+    .acc-btn[aria-expanded="true"] .acc-chev {
+      transform: rotate(180deg);
+    }
+    .acc-content {
+      padding: 0 16px 18px;
+      font-size: 0.92rem;
+      color: #1E293B;
+    }
+
+    /* Clean Bullet Lists */
+    .clean-list {
+      margin: 8px 0 0;
+      padding-left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .clean-list li { padding-left: 2px; }
+
+    .callout-note {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: #F8FAFC;
+      border: 1px solid #CBD5E1;
+      font-size: 0.88rem;
+    }
+    .callout-warm {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: var(--amber-50);
+      border: 1px solid #FDE68A;
+      color: #78350F;
+      font-size: 0.88rem;
+    }
+
+    /* Sub-cards inside "Why Don't We Always Do a Urine Culture?" */
+    .reason-block {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 14px;
+      margin-top: 10px;
+    }
+    .reason-block h4 {
+      margin: 0 0 6px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--nhs-dark);
+    }
+
+    /* Sample Steps */
+    .step-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .step-badge {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--nhs-blue);
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.82rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* Commitment Footer Card */
+    .commitment-card {
+      background: var(--nhs-dark);
+      color: #FFFFFF;
+      border-radius: 16px;
+      padding: 18px 16px;
+    }
+    .commitment-card h2 {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+      font-weight: 800;
+    }
+    .commitment-card ul {
+      margin: 0 0 12px;
+      padding-left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 0.9rem;
+      color: #E0F2FE;
+    }
+    .commitment-card p {
+      margin: 0;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      padding-top: 12px;
+    }
+
+    /* Share Bar */
+    .share-wrap {
+      display: flex;
+      justify-content: center;
+      margin-top: 4px;
+    }
+    .btn-share {
+      background: #FFFFFF;
+      color: var(--nhs-dark);
+      border: 2px solid var(--nhs-dark);
+      border-radius: 12px;
+      padding: 11px 18px;
+      font-size: 0.9rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 46px;
+    }
+    .btn-share:active { background: var(--nhs-light-blue); }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0F172A;
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 11px 18px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      z-index: 50;
+    }
+    .toast.show { opacity: 1; }
+
+    footer {
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      padding: 6px 16px 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div>
+        <span class="nhs-pill">NHS</span>
+        <span class="board-name">Ayrshire &amp; Arran</span>
+      </div>
+      <h1 class="app-title">Understanding Your Urine Test</h1>
+      <p class="app-subtitle">Getting the Right Care for Urine Infections (UTIs) — A Guide for Patients and Families</p>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Opening Reassurance -->
+    <section class="intro-box" aria-label="Introduction">
+      <p>
+        When you or a loved one feels unwell, it&rsquo;s natural to want answers and the right treatment. This guide explains how we decide if a urine test (called a <strong>urine culture</strong>) is needed to help us treat a &ldquo;waterworks&rdquo; infection (Urinary Tract Infection or UTI), and why making the right test choice is so important.
+      </p>
+    </section>
+
+    <!-- Interactive "What Have You Noticed?" Checker -->
+    <section class="card" aria-label="Interactive Symptom and Sign Checker">
+      <div class="card-header">
+        <h2>Tap What You&rsquo;ve Noticed Today</h2>
+        <p>Select a sign below to see whether a urine test is helpful right now</p>
+      </div>
+      <div class="card-body">
+        <div class="scenario-grid">
+          <button type="button" class="scenario-btn" data-scenario="confusion_fall">
+            <div>
+              <span class="scenario-label">New confusion, agitation, or a fall</span>
+              <span class="scenario-hint">Without pain when peeing or a fever</span>
+            </div>
+            <span class="scenario-arrow">&rsaquo;</span>
+          </button>
+
+          <button type="button" class="scenario-btn" data-scenario="smelly_dark">
+            <div>
+              <span class="scenario-label">Dark, cloudy, or smelly pee</span>
+              <span class="scenario-hint">Strong odour or concentrated colour</span>
+            </div>
+            <span class="scenario-arrow">&rsaquo;</span>
+          </button>
+
+          <button type="button" class="scenario-btn" data-scenario="positive_dipstick">
+            <div>
+              <span class="scenario-label">A &ldquo;positive&rdquo; urine dipstick test</span>
+              <span class="scenario-hint">Quick strip test showed germs/white cells</span>
+            </div>
+            <span class="scenario-arrow">&rsaquo;</span>
+          </button>
+
+          <button type="button" class="scenario-btn" data-scenario="bladder_symptoms">
+            <div>
+              <span class="scenario-label">Pain/burning when peeing or rushing</span>
+              <span class="scenario-hint">2+ new waterworks symptoms</span>
+            </div>
+            <span class="scenario-arrow">&rsaquo;</span>
+          </button>
+
+          <button type="button" class="scenario-btn" data-scenario="catheter">
+            <div>
+              <span class="scenario-label">Has a urinary catheter</span>
+              <span class="scenario-hint">Tube draining urine into a bag</span>
+            </div>
+            <span class="scenario-arrow">&rsaquo;</span>
+          </button>
+
+          <button type="button" class="scenario-btn" data-scenario="fever_unwell">
+            <div>
+              <span class="scenario-label">Fever, shivering, or very unwell</span>
+              <span class="scenario-hint">Back/side pain or sudden deterioration</span>
+            </div>
+            <span class="scenario-arrow">&rsaquo;</span>
+          </button>
+        </div>
+
+        <!-- Dynamic Answer Container -->
+        <div id="scenarioAnswer" class="hidden" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- Full QRG Sections (Expandable for Easy Mobile Reading) -->
+    <section class="card" aria-label="Detailed Patient and Family Guide">
+
+      <!-- Section 1: What is a UTI? -->
+      <div class="accordion-item">
+        <button type="button" class="acc-btn" aria-expanded="true" data-acc="what_is_uti">
+          <span class="acc-title">1. What is a Urine Infection (UTI)?</span>
+          <span class="acc-chev">&#9662;</span>
+        </button>
+        <div class="acc-content">
+          <p style="margin-top:0;">
+            A UTI happens when germs that normally live in the gut get into the bladder or kidneys and cause illness. Common signs of a UTI can include:
+          </p>
+          <ul class="clean-list">
+            <li><strong>Pain or burning</strong> when you pee</li>
+            <li><strong>Needing to pee very often</strong>, but only a little bit comes out at a time</li>
+            <li><strong>A sudden, strong urge</strong> to pee that cannot be put off</li>
+            <li><strong>New or worsening leaking</strong> (incontinence)</li>
+            <li><strong>Pain in your lower tummy or back</strong></li>
+          </ul>
+          <div class="callout-warm">
+            Sometimes, a UTI can make people feel very unwell, with a <strong>fever and shivering</strong>. When this happens, <strong>confusion is a common additional feature</strong>.
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2: What is a Urine Culture? -->
+      <div class="accordion-item">
+        <button type="button" class="acc-btn" aria-expanded="false" data-acc="what_is_culture">
+          <span class="acc-title">2. What is a Urine Culture?</span>
+          <span class="acc-chev">&#9662;</span>
+        </button>
+        <div class="acc-content hidden">
+          <p style="margin-top:0;">
+            A <strong>urine culture</strong> is a lab test that looks for the germs in your pee that have caused your infection. If germs grow in the lab, they are tested against different antibiotic medicines to help us know which one will work best to treat them.
+          </p>
+        </div>
+      </div>
+
+      <!-- Section 3: Why Don't We Always Do a Urine Culture? -->
+      <div class="accordion-item">
+        <button type="button" class="acc-btn" aria-expanded="true" data-acc="why_not_always">
+          <span class="acc-title">3. Why Don&rsquo;t We Always Do a Urine Culture?</span>
+          <span class="acc-chev">&#9662;</span>
+        </button>
+        <div class="acc-content">
+          <p style="margin-top:0;">
+            This might sound surprising, but sometimes a urine test isn&rsquo;t the best first step. Here&rsquo;s why:
+          </p>
+
+          <div class="reason-block">
+            <h4>&ldquo;Germs Without Symptoms&rdquo; (Asymptomatic Bacteriuria &ndash; ASB)</h4>
+            <p style="margin:0 0 8px;">
+              It&rsquo;s very common for some people, especially older adults or those with a catheter (a tube in the bladder to drain pee), to have germs in their pee without actually having an infection. This is called <strong>ASB</strong> and is harmless.
+            </p>
+            <p style="margin:0;">
+              Treating these &ldquo;germs without symptoms&rdquo; doesn&rsquo;t make them go away and can cause harm. It can lead to needless side effects from antibiotics and will make antibiotic medicines less effective for future infections.
+            </p>
+          </div>
+
+          <div class="reason-block">
+            <h4>Misleading Signs</h4>
+            <ul class="clean-list" style="margin-top:4px;">
+              <li><strong>Dipstick tests</strong> (quick tests done with a strip) can often show &ldquo;positive&rdquo; results even when there&rsquo;s no infection. They can be misleading.</li>
+              <li><strong>Pee that looks dark or cloudy or smells strongly</strong> is usually a sign of not drinking enough fluids, not an infection.</li>
+              <li><strong>New confusion, agitation, or a recent fall:</strong> On their own, these are very common in older adults and are usually caused by dehydration, constipation, pain, or medication &mdash; not a urine infection &mdash; unless accompanied by bladder pain or a high temperature.</li>
+            </ul>
+          </div>
+
+          <div class="reason-block">
+            <h4>Unnecessary Risks</h4>
+            <ul class="clean-list" style="margin-top:4px;">
+              <li>Giving antibiotics when they&rsquo;re not really needed can cause side effects like sickness, thrush, rashes, or even serious gut infections (like <strong>&ldquo;C. diff&rdquo;</strong>) without you getting any benefits from the treatment.</li>
+              <li>It also contributes to <strong>&ldquo;superbugs&rdquo;</strong> &ndash; germs that have become resistant to many antibiotic types, making real infections much harder to treat in the future.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 4: When IS a Urine Culture Test Really Important? -->
+      <div class="accordion-item">
+        <button type="button" class="acc-btn" aria-expanded="false" data-acc="when_important">
+          <span class="acc-title">4. When IS a Urine Culture Test Really Important?</span>
+          <span class="acc-chev">&#9662;</span>
+        </button>
+        <div class="acc-content hidden">
+          <p style="margin-top:0;">
+            We prioritise urine tests when they will truly help guide treatment and keep you safe. We will usually send a urine test if you have:
+          </p>
+          <ul class="clean-list">
+            <li><strong>Two or more new or worsening symptoms</strong> of a urine infection (like pain when peeing, rushing, or new leaking).</li>
+            <li><strong>Serious signs of infection</strong>, such as a fever, shivering, or if you are very unwell (signs of sepsis).</li>
+            <li><strong>Specific health conditions</strong> that make UTIs more serious, such as pregnancy, a recent kidney transplant, or if you have a catheter and new signs of being unwell.</li>
+            <li><strong>Symptoms that don&rsquo;t improve</strong> with initial treatment.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Section 5: How You Can Help Us Get the Best Sample -->
+      <div class="accordion-item">
+        <button type="button" class="acc-btn" aria-expanded="false" data-acc="how_to_sample">
+          <span class="acc-title">5. How You Can Help Us Get the Best Sample</span>
+          <span class="acc-chev">&#9662;</span>
+        </button>
+        <div class="acc-content hidden">
+          <p style="margin-top:0;">
+            If a urine culture is useful, getting a good sample is important to avoid misleading results. We will give you clear instructions, but generally:
+          </p>
+          <div class="step-row">
+            <span class="step-badge">1</span>
+            <div>
+              <strong>Mid-stream sample:</strong> We&rsquo;ll ask you to collect a &ldquo;mid-stream&rdquo; sample (peeing a little into the toilet bowl first, then into the sample pot). There&rsquo;s a leaflet with instructions you can ask for that explains exactly how to do this properly.
+            </div>
+          </div>
+          <div class="step-row">
+            <span class="step-badge">2</span>
+            <div>
+              <strong>If you have a catheter:</strong> We&rsquo;ll take the sample from the catheter itself, not the bag. If your catheter has been in for a while we&rsquo;ll change the catheter first.
+            </div>
+          </div>
+          <div class="step-row">
+            <span class="step-badge">3</span>
+            <div>
+              <strong>Special red-top pot:</strong> We&rsquo;ll use a special red-top pot (filled to the line so the preservative keeps the sample accurate).
+            </div>
+          </div>
+          <div class="step-row">
+            <span class="step-badge">4</span>
+            <div>
+              <strong>Tell us your symptoms:</strong> It&rsquo;s vital that we know your symptoms. Please tell your healthcare team exactly what and how you&rsquo;re feeling.
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Commitment Box -->
+    <section class="commitment-card" aria-label="Our Commitment to Your Safety">
+      <h2>Our Commitment to Your Safety</h2>
+      <p style="border:none; padding:0 0 8px; font-weight:400; color:#E0F2FE;">
+        Your healthcare team is making careful decisions about your treatment. By only sending urine tests when they are truly needed, we are:
+      </p>
+      <ul>
+        <li>Protecting you from unnecessary antibiotics and their side effects.</li>
+        <li>Making sure antibiotics work when you really need them.</li>
+        <li>Saving valuable time for you and our staff, so they can focus on what matters most.</li>
+      </ul>
+      <p>
+        If you have any questions or concerns, please don&rsquo;t hesitate to ask your doctor or nurse.
+      </p>
+    </section>
+
+    <!-- Share Button for Families -->
+    <div class="share-wrap">
+      <button id="sharePageBtn" type="button" class="btn-share">
+        &#8599; Share This Guide with Family
+      </button>
+    </div>
+
+  </main>
+
+  <footer>
+    NHS Ayrshire &amp; Arran &bull; Patient &amp; Family Information Guide on Urine Cultures &amp; UTIs
+  </footer>
+
+  <div id="toast" class="toast" role="status">&#10003; Link copied to share</div>
+
+  <script>
+    (function () {
+      function trackFamilyEvent(eventName, props) {
+        try {
+          if (typeof window.plausible === 'function') {
+            window.plausible(eventName, props ? { props: props } : undefined);
+          }
+        } catch (e) {
+          // Ignore if offline or blocked
+        }
+      }
+
+      const scenarios = {
+        confusion_fall: {
+          styleClass: 'ans-sky',
+          badgeClass: 'badge-sky',
+          badge: 'Often Not a Urine Infection',
+          title: 'New confusion, agitation, or a recent fall on their own',
+          paragraphs: [
+            'It is very common to think a sudden fall or confusion must be a urine infection. However, on their own (without pain when peeing, fever, or shivering), these are usually caused by <strong>dehydration, constipation, pain, poor sleep, or medication</strong>.',
+            'Because many older adults naturally carry harmless bacteria in their bladder, doing a urine test right now often gives a misleading result and leads to unnecessary antibiotics &mdash; while missing the real cause. Your care team will check hydration, bowels, pain, and medications first.'
+          ]
+        },
+        smelly_dark: {
+          styleClass: 'ans-sky',
+          badgeClass: 'badge-sky',
+          badge: 'Usually Needs More Fluids',
+          title: 'Pee that looks dark, cloudy, or smells strongly',
+          paragraphs: [
+            'Strong-smelling, dark, or cloudy urine on its own is normally a sign of <strong>concentrated urine from not drinking enough fluids</strong> (or certain foods and medicines) &mdash; not a urine infection.',
+            'Unless there are new waterworks symptoms like pain or burning when peeing, encouraging extra drinks over the next 24 hours is the safest and most effective step.'
+          ]
+        },
+        positive_dipstick: {
+          styleClass: 'ans-amber',
+          badgeClass: 'badge-amber',
+          badge: 'Why We Avoid Dipsticks in Older Adults',
+          title: 'Why a &ldquo;positive&rdquo; urine dipstick can be misleading',
+          paragraphs: [
+            'Up to half of older adults and almost everyone with a long-term catheter have harmless bacteria living in their urine all the time (called <strong>Asymptomatic Bacteriuria</strong>).',
+            'A quick strip (dipstick) test will almost always turn positive for these harmless germs, even when there is no infection. Treating them with antibiotics does not help recovery and increases the risk of side effects like thrush, sickness, or serious gut infections (<em>C. diff</em>).'
+          ]
+        },
+        bladder_symptoms: {
+          styleClass: 'ans-green',
+          badgeClass: 'badge-green',
+          badge: 'When a Urine Test Helps',
+          title: 'New pain when peeing, rushing, or frequent small pees',
+          paragraphs: [
+            'When someone has <strong>new pain or burning when peeing</strong>, or <strong>two or more new waterworks symptoms</strong> (rushing to the toilet, peeing much more often, new leaking, or lower tummy pain), a urine culture is very helpful.',
+            'Please let the nurse or doctor know these exact symptoms so they can collect a clean mid-stream sample in a red-top pot before any antibiotics are started.'
+          ]
+        },
+        catheter: {
+          styleClass: 'ans-amber',
+          badgeClass: 'badge-amber',
+          badge: 'Catheter Care & Testing',
+          title: 'How we check for infection when someone has a catheter',
+          paragraphs: [
+            'Almost all urinary catheters carry harmless bacteria, and cloudy or smelly urine in the tubing is normal. We only test if the person becomes newly unwell (such as fever, shivering, new lower tummy/back pain, or visible blood).',
+            'If a test is needed, we never take urine from the drainage bag &mdash; and if the catheter has been in place for more than 7 days, a nurse will change the catheter first before taking a fresh sample.'
+          ]
+        },
+        fever_unwell: {
+          styleClass: 'ans-red',
+          badgeClass: 'badge-red',
+          badge: 'Important &mdash; Tell a Nurse or Doctor Straight Away',
+          title: 'Fever, shivering, back pain, or suddenly very unwell',
+          paragraphs: [
+            'A high or very low temperature, uncontrollable shivering (rigors), new pain in the lower back/side, or becoming suddenly very unwell are serious signs of infection.',
+            'When a urine infection causes a fever and shivering, <strong>new confusion is a common additional feature</strong>. Please alert the nurse or doctor immediately so they can assess observations and arrange urgent treatment and a urine culture.'
+          ]
+        }
+      };
+
+      const scenarioBtns = document.querySelectorAll('.scenario-btn');
+      const scenarioAnswer = document.getElementById('scenarioAnswer');
+
+      scenarioBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const key = btn.dataset.scenario;
+          const data = scenarios[key];
+          if (!data) return;
+
+          scenarioBtns.forEach(b => b.classList.remove('active', 'active-urgent'));
+          btn.classList.add(key === 'fever_unwell' ? 'active-urgent' : 'active');
+
+          scenarioAnswer.className = `answer-panel ${data.styleClass}`;
+          scenarioAnswer.innerHTML = `
+            <span class="ans-badge ${data.badgeClass}">${data.badge}</span>
+            <h3>${data.title}</h3>
+            ${data.paragraphs.map(p => `<p>${p}</p>`).join('')}
+          `;
+          scenarioAnswer.classList.remove('hidden');
+
+          trackFamilyEvent('Family Topic Checked', { topic: key });
+        });
+      });
+
+      // Accordions
+      document.querySelectorAll('.acc-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+          const content = btn.nextElementSibling;
+          btn.setAttribute('aria-expanded', String(!isExpanded));
+          content.classList.toggle('hidden', isExpanded);
+          if (!isExpanded) {
+            trackFamilyEvent('Family Section Opened', { section: btn.dataset.acc });
+          }
+        });
+      });
+
+      // Share button
+      const sharePageBtn = document.getElementById('sharePageBtn');
+      const toast = document.getElementById('toast');
+
+      sharePageBtn.addEventListener('click', async () => {
+        trackFamilyEvent('Family Guide Shared');
+        const shareData = {
+          title: 'Understanding Your Urine Test — NHS Ayrshire & Arran',
+          text: 'Helpful NHS Ayrshire & Arran guide for patients and families on urine tests and UTIs:',
+          url: window.location.href
+        };
+        try {
+          if (navigator.share) {
+            await navigator.share(shareData);
+          } else if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(window.location.href);
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2400);
+          }
+        } catch (e) {
+          // User cancelled share
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
